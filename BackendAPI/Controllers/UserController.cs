@@ -1,4 +1,5 @@
 ﻿using BackendAPI.Models;
+using BackendAPI.RequestBody;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,6 +23,23 @@ namespace BackendAPI.Controllers
             {
                 var users = await _context.Users.ToListAsync();
                 return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet("GetUserById/{id}")]
+        public async Task<ActionResult<User>> GetUserById(int id)
+        {
+            try
+            {
+                var user = await _context.Users.FindAsync(id);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+                return Ok(user);
             }
             catch (Exception ex)
             {

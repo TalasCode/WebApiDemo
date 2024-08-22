@@ -1,4 +1,4 @@
-﻿namespace BackendAPI.Models
+﻿namespace BackendAPI.RequestBody
 {
     public class AddUserRequest
     {
